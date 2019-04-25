@@ -1,5 +1,7 @@
 import pkg from './package'
 
+let GOOGLE_MAPS_API_KEY = 'AIzaSyBSwSpVvkq2VOq8iWYnzHapXAYT0_ydXZM';
+
 export default {
   mode: 'universal',
 
@@ -13,9 +15,12 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
+    script: [
+      { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBSwSpVvkq2VOq8iWYnzHapXAYT0_ydXZM', defer: true }
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Dancing+Script|Fascinate+Inline' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Inconsolata|Fascinate+Inline' }
     ]
   },
 

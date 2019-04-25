@@ -1,12 +1,12 @@
 <template>
-    <b-navbar id="navBar" sticky toggleable="md">
+    <b-navbar type="dark" id="navBar" sticky toggleable="md">
 
     <b-navbar-brand to="/" @click.native="navItemsVisible = false">
       <h1 id="brandText" >Classic Cleaners</h1>
     </b-navbar-brand>
 
     <b-navbar-toggle target="nav_collapse" class="float-right"></b-navbar-toggle>
-    <b-collapse is-nav id="nav_collapse" v-model="navItemsVisible">
+    <b-collapse is-nav id="nav_collapse">
 
       <b-navbar-nav class="ml-auto">
         <b-nav-item href="tel:+18056540117">Call</b-nav-item>
@@ -18,32 +18,28 @@
   </b-navbar>
 </template>
 
-<style lang="scss">
+<style>
+#navBar{
+  background-color: #00023B;
+}
 
 #brandText{
   font-family: 'Fascinate Inline', cursive;
   font-size: 60px;
+  color: white;
+  text-shadow: 2px 2px 5px #E8DE5B;
+
+}
+
+.nav-link{
+  color: white !important;
 }
 
 </style>
 
 <script>
 
-export default {
-  data () {
-    return {
-      navItemsVisible: false
-    }
-  },
-  methods: {
-      handleNavBarVisibility: function (){
-        // If the navbar items are not visible we do not want to allow this to show the items, only collapse them.
-        if (this.navItemsVisible) {
-          this.navItemsVisible = false;
-        }
-      }
-    }
-}
+
 
 
 </script>
