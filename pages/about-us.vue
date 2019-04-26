@@ -10,11 +10,11 @@
             <img src="~/assets/images/classic_cleaners_location.jpg" alt="Classic Cleaners Storefront" class="img-fluid mx-auto d-block"></img>
           </b-col>
         </b-row>
-        <b-row class="my-5">
-          <b-col sm="8">
+        <b-row class="my-5" >
+          <b-col sm="8" order="1">
             <img src="~/assets/images/classic_cleaners_interior.jpg" alt="Classic Cleaners Storefront" class="img-fluid mx-auto d-block"></img>
           </b-col>
-          <b-col sm="4">
+          <b-col sm="4" order-sm="2">
             <p>We have some exciting and positive changes slowly taking effect, here at Classic Cleaners, we are a green cleaners, echo friendly and we like encourage recycling of the hangers and plastic bags.</p>
           </b-col>
         </b-row>
