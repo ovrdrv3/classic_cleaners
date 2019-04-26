@@ -13,7 +13,7 @@
 
 #bottom-bar{
 
-  background-color: #eee;
+  background-color: #00023B;
 
 }
 

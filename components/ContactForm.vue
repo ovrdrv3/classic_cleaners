@@ -4,7 +4,6 @@
             @change="validateForm"
             name="contact-us"
             ref="form"
-            @reset="onReset"
             method="POST"
             netlify-honeypot="prefix"
             data-netlify="true">
@@ -50,19 +49,19 @@
       </b-form-group>
       <b-form-group id="formComment"
                     label="Message:"
-                    label-for="comment">
+                    label-for="comment"
+                    :invalid-feedback="errors.comment">
         <b-form-textarea id="comment"
                       name="comment"
                       type="text"
                       v-model="form.comment"
                       :rows="3"
-                      :max-rows="6">
+                      :max-rows="6"
+                      :state="stateOfElement('comment')">
         </b-form-textarea>
-      </b-form-group>
       </b-form-group>
       <b-button type="button" :disabled="errors.any || submissionSuccess" @click.prevent="onSubmit"
  :variant="submitButtonVariant">{{form.submitText}}</b-button>
-      <b-button type="reset" variant="outline-danger">Reset</b-button>
     </b-form>
   </div>
 </template>
@@ -77,9 +76,6 @@ export default {
         email: '',
         phone: '',
         comment: '',
-        packages: null,
-        referral: null,
-        otherReferral: null,
         submitText: 'Submit'
       },
       submissionAttempt : false,
@@ -90,29 +86,8 @@ export default {
         name: '',
         email: '',
         phone: '',
-        referral: '',
-        otherReferral: ''
+        comment: ''
       }
-    }
-  },
-  mounted: function () {
-    if (process.client) {
-        var paramsString = window.location.search;
-        var searchParams = new URLSearchParams(paramsString);
-        var newFormValue = '';
-        if (searchParams.has("package")){
-          // console.log('Package ' + searchParams.get("package"));
-          // this.form.packages = 'Package ' + searchParams.get("package") ;
-          var queryValue = searchParams.get("package") ;
-          this.packages.forEach(function findMostSimilarPackage(currentValue) {
-            if (currentValue.toString().substring(0, queryValue.length) == queryValue) {
-              // console.log(currentValue)
-              newFormValue = currentValue;
-            }
-          });
-          this.form.packages = newFormValue;
-          // search for the most similiar package in the set.
-        }
     }
   },
   methods: {
@@ -129,8 +104,7 @@ export default {
       this.errors.name = '';
       this.errors.email = '';
       this.errors.phone = '';
-      this.errors.referral = '';
-      this.errors.otherReferral = '';
+      this.errors.comment = '';
 
       if (!this.form.name) {
         this.errors.any = true;
@@ -148,6 +122,11 @@ export default {
       } else if (!this.validEmail(this.form.email)) {
         this.errors.any = true;
         this.errors.email = 'Valid email required';
+      }
+
+      if (!this.form.comment) {
+        this.errors.any = true;
+        this.errors.comment ='Message required';
       }
 
       if (this.errors.any) {
@@ -169,9 +148,8 @@ export default {
       if (notReadyToProceed) {
         return;
       } else {
-        // this.$refs.form.submit();
 
-        fetch("/", {
+        fetch("/contact-us", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: this.encode({
@@ -180,7 +158,6 @@ export default {
           })
         })
           .then(() => {
-            // this.$router.push("submit-success");
             this.form.submitText = 'Thanks! You will hear from us shortly!';
             this.submitButtonVariant = 'btn-outline-success';
             this.submissionSuccess = true;
@@ -189,49 +166,7 @@ export default {
             this.form.submitText = 'Please Refresh Your Page or Try a Different Browser - Error Sending Form';
           });
 
-        // const axiosConfig = {
-        //   header: { "Content-Type": "application/x-www-form-urlencoded" }
-        // };
-
-        // axios.post(
-        //   "/",
-        //   this.encode({
-        //     "form-name": "contact-us",
-        //     ...this.form
-        //   }),
-        //   axiosConfig
-        // )
-        // // .then(function (response) {
-        // //   console.log(response);
-        // // })
-        // .then(() => {
-        //     // this.$router.push("submit-success");
-        //     this.form.submitText = 'Thanks! You will hear from us shortly!';
-        //     this.submitButtonVariant = 'btn-outline-success';
-        //     this.submissionSuccess = true;
-        // })
-        // .catch(() => {
-        //     this.form.submitText = 'Please Refresh Your Page - Error Sending Form';
-        // });
-
-
-      } // ready to proceed, make POST attempt
-    },
-    onReset (evt) {
-      evt.preventDefault();
-      /* Reset form values */
-      this.form.name =  '';
-      this.form.email = '';
-      this.form.phone = '';
-      this.form.comment = '';
-      this.form.packages = null;
-      this.errors.referral = '';
-      this.errors.otherReferral = '';
-      this.form.submitText =  'Submit';
-      this.errors.any = false;
-      this.submissionAttempt = false;
-      this.submissionSuccess = false;
-
+      }
     },
     validEmail: function (email) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

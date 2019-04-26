@@ -32,6 +32,10 @@ html {
   box-sizing: border-box;
 }
 
+body{
+  font-size: 1.5em;
+}
+
 /**,
 *:before,
 *:after {

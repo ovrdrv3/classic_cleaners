@@ -33,6 +33,7 @@
 
 .nav-link{
   color: white !important;
+  font-size: 1.25em;
 }
 
 </style>
