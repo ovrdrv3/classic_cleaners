@@ -4,7 +4,7 @@
         <h1>About Classic Cleaners</h1>
         <b-row class="my-5">
           <b-col sm="4">
-            <p>Classic Cleaners is family owned and has been in business for over 25 years. We are proud members of the BBB, we at Classic Cleaners take pride in our customers that we serve and in the people we employee. We look forward to reading your comments and reviews on our service.</p>
+            <p>Classic Cleaners is family owned and has been in business for over 25 years. We are proud members of the BBB. At Classic Cleaners, we take pride in our customers that we serve and in the people we employ. We look forward to reading your comments and reviews on our service.</p>
           </b-col>
           <b-col sm="8">
             <img src="~/assets/images/classic_cleaners_location.jpg" alt="Classic Cleaners Storefront" class="img-fluid mx-auto d-block"></img>
